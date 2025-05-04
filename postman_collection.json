@@ -1,0 +1,278 @@
+{
+  "info": {
+    "name": "Warehouse API",
+    "description": "API для управления складами и продуктами",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Пользователи",
+      "item": [
+        {
+          "name": "Регистрация пользователя",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            },
+            "description": "Регистрация нового пользователя"
+          }
+        },
+        {
+          "name": "Вход в систему",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            },
+            "description": "Вход в систему и получение JWT токена"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Склады",
+      "item": [
+        {
+          "name": "Создание склада",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Основной склад\",\n    \"location\": \"Москва, ул. Складская, 1\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/warehouses/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "warehouses",
+                ""
+              ]
+            },
+            "description": "Создание нового склада"
+          }
+        },
+        {
+          "name": "Получение списка складов",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/warehouses/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "warehouses",
+                ""
+              ]
+            },
+            "description": "Получение списка всех складов"
+          }
+        },
+        {
+          "name": "Получение склада по ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/warehouses/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "warehouses",
+                "1"
+              ]
+            },
+            "description": "Получение информации о складе по его ID"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Продукты",
+      "item": [
+        {
+          "name": "Создание продукта",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Товар 1\",\n    \"quantity\": 100,\n    \"warehouse_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/products/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                ""
+              ]
+            },
+            "description": "Создание нового продукта на складе"
+          }
+        },
+        {
+          "name": "Получение списка продуктов",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                ""
+              ]
+            },
+            "description": "Получение списка всех продуктов"
+          }
+        },
+        {
+          "name": "Обновление продукта",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Обновленный товар\",\n    \"quantity\": 200,\n    \"warehouse_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/products/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                "1"
+              ]
+            },
+            "description": "Обновление информации о продукте"
+          }
+        },
+        {
+          "name": "Удаление продукта",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products",
+                "1"
+              ]
+            },
+            "description": "Удаление продукта"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    }
+  ]
+} 
